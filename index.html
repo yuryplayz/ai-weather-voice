@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Weather + Voice</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>🌍 AI Weather + Voice 🎤</h1>
+
+    <form id="search-form">
+      <input id="city" type="text" placeholder="Search a city (e.g., Lisbon)" required />
+      <button type="submit">Get Forecast</button>
+    </form>
+
+    <section id="result" class="card hidden">
+      <div class="row">
+        <div>
+          <h2 id="place"></h2>
+          <p id="desc"></p>
+          <p><span id="temp"></span> • <span id="feels"></span></p>
+        </div>
+        <img id="icon" alt="" />
+      </div>
+
+      <div class="actions">
+        <button type="button" id="speak-btn">🔊 Speak Forecast</button>
+        <button type="button" id="stop-btn">⏹️ Stop</button>
+      </div>
+
+      <audio id="music" controls></audio>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
