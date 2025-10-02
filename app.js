@@ -11,6 +11,7 @@ const iconEl = document.getElementById("icon");
 const speakBtn = document.getElementById("speak-btn");
 const stopBtn = document.getElementById("stop-btn");
 const music = document.getElementById("music");
+const forecastEl = document.getElementById("forecast");
 
 let latestForecast = null;
 
@@ -22,7 +23,7 @@ form.addEventListener("submit", async (e) => {
     const coords = await getCoordinates(city);
     const data = await fetchWeather(coords.lat, coords.lon);
     latestForecast = normalizeWeather(city, coords.country, data);
-    render(latestForecast);
+    render(latestForecast, data.daily);
     playMusicFor(latestForecast);
   } catch (err) {
     alert("Could not fetch weather. Check city name or your API key.");
@@ -65,7 +66,7 @@ function normalizeWeather(city, country, data) {
   return { name: `${city}, ${country}`, temp, feels, description, icon, main };
 }
 
-function render(w) {
+function render(w, daily) {
   placeEl.textContent = w.name;
   descEl.textContent = capitalize(w.description);
   tempEl.textContent = `${w.temp}°C`;
@@ -73,6 +74,29 @@ function render(w) {
   iconEl.src = `https://openweathermap.org/img/wn/${w.icon}@2x.png`;
   iconEl.alt = w.description;
   result.classList.remove("hidden");
+
+  // 5-day forecast
+  forecastEl.innerHTML = "";
+  daily.slice(1, 6).forEach(day => {
+    const card = document.createElement("div");
+    card.className = "forecast-card";
+
+    const date = new Date(day.dt * 1000);
+    const options = { weekday: "short" };
+    const dayName = date.toLocaleDateString(undefined, options);
+
+    const tempDay = Math.round(day.temp.day);
+    const icon = day.weather?.[0]?.icon ?? "01d";
+    const desc = capitalize(day.weather?.[0]?.description ?? "");
+
+    card.innerHTML = `
+      <h4>${dayName}</h4>
+      <img src="https://openweathermap.org/img/wn/${icon}.png" alt="${desc}" />
+      <p>${tempDay}°C</p>
+      <p>${desc}</p>
+    `;
+    forecastEl.appendChild(card);
+  });
 }
 
 function forecastToSpeech(w) {
