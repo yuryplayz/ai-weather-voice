@@ -63,7 +63,7 @@ function normalizeWeather(city, country, data) {
   const description = data.current.weather?.[0]?.description ?? "—";
   const icon = data.current.weather?.[0]?.icon ?? "01d";
   const main = data.current.weather?.[0]?.main?.toLowerCase() ?? "";
-  return { name: `${city}, ${country}`, temp, feels, description, icon, main };
+  return { name: `${city.toUpperCase()}, ${country.toUpperCase()}`, temp, feels, description, icon, main };
 }
 
 function render(w, daily) {
