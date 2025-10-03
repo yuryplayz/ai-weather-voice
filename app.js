@@ -106,9 +106,9 @@ function forecastToSpeech(w) {
 function speak(text) {
   const utter = new SpeechSynthesisUtterance(text);
   utter.pitch = 0.7;
-  utter.rate = 0.9;
+  utter.rate = 1.0;
   const voices = speechSynthesis.getVoices();
-  const preferred = voices.find(v => /male|english/i.test(v.name)) || voices[0];
+  const preferred = voices.find(v => /male|en-US|latino|spanish/i.test(v.name)) || voices[0];
   if (preferred) utter.voice = preferred;
   window.speechSynthesis.cancel();
   window.speechSynthesis.speak(utter);
