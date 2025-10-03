@@ -46,3 +46,49 @@ button:hover { filter: brightness(1.1); }
 }
 #icon { width: 84px; height: 84px; }
 .actions { display: flex; gap: 10px; margin-top: 12px; }
+
+/* 5-day forecast styling */
+.forecast {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.forecast-card {
+  flex: 1;
+  min-width: 120px;
+  padding: 16px;
+  border-radius: 12px;
+  background: #1f2329;
+  border: 1px solid #2b2f36;
+  text-align: center;
+}
+
+.forecast-card h4 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: #5b9cff;
+}
+
+.forecast-card img {
+  width: 50px;
+  height: 50px;
+  margin: 8px 0;
+}
+
+.forecast-card p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.forecast-card p:first-of-type {
+  font-weight: bold;
+  font-size: 18px;
+  color: #eaecee;
+}
+
+.forecast-card p:last-of-type {
+  font-size: 12px;
+  color: #9da3ab;
+}
