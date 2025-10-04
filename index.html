@@ -8,7 +8,7 @@
 </head>
 <body>
   <main class="container">
-    <h1>🌍 AI Weather + Voice 🎤</h1>
+    <h1>🌍 MR WorldWideWeather 🎤</h1>
 
     <form id="search-form">
       <input id="city" type="text" placeholder="Search a city (e.g., Lisbon)" required />
@@ -30,7 +30,7 @@
         <button type="button" id="stop-btn">⏹️ Stop</button>
       </div>
 
-      <audio id="music" controls></audio>
+      <audio id="music"></audio>
 
       <!-- New 5-day forecast -->
       <div id="forecast" class="forecast"></div>
@@ -39,5 +39,20 @@
 
   <script src="config.js"></script>
   <script src="app.js"></script>
+
+  
+<div style="display: flex;">
+
+  <!-- Left sidebar -->
+  <div style="width: 200px; background:#1e1e1e; height:30vh; padding:20px; display:flex; flex-direction:column; gap:10px;">
+    <button style="padding:10px; border:none; border-radius:6px; background:#3a3a3a; color:white; cursor:pointer;">Home</button>
+    <a href="biography.html" style="text-decoration:none;">
+    <button style="padding:10px; border:none; border-radius:6px; background:#3a3a3a; color:white; cursor:pointer;">Biography</button>
+    </a>
+    <button style="padding:10px; border:none; border-radius:6px; background:#3a3a3a; color:white; cursor:pointer;">Songs</button>
+  </div>
+
 </body>
+
+
 </html>
