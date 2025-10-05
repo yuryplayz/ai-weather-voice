@@ -129,3 +129,16 @@ function capitalize(s) {
 }
 
 speechSynthesis.onvoiceschanged = () => {};
+
+//buttons on sidebar
+document.getElementById('homeBtn').onclick = function () {
+  window.location.href = 'home.html';  // Link to home page
+};
+
+document.getElementById('bioBtn').onclick = function () {
+  window.location.href = 'biography.html';  // Link to biography page
+};
+
+document.getElementById('songsBtn').onclick = function () {
+  window.location.href = 'songs.html';  // Link to songs page
+};
