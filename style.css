@@ -92,3 +92,16 @@ button:hover { filter: brightness(1.1); }
   font-size: 12px;
   color: #9da3ab;
 }
+.image-change {
+  animation-duration: 2s;
+  animation-name: grow-shrink;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes grow-shrink {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
