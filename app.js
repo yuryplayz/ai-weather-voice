@@ -63,7 +63,11 @@ function normalizeWeather(city, country, data) {
   const description = data.current.weather?.[0]?.description ?? "—";
   const icon = data.current.weather?.[0]?.icon ?? "01d";
   const main = data.current.weather?.[0]?.main?.toLowerCase() ?? "";
-  return { name: `${city.toUpperCase()}, ${country.toUpperCase()}`, temp, feels, description, icon, main };
+  const currentTime = data.current.dt;
+  const sunrise = data.current.sunrise;
+  const sunset = data.current.sunset;
+  const isDay = currentTime >= sunrise && currentTime < sunset;
+  return { name: `${city.toUpperCase()}, ${country.toUpperCase()}`, temp, feels, description, icon, main, isDay };
 }
 
 function render(w, daily) {
@@ -74,6 +78,15 @@ function render(w, daily) {
   iconEl.src = `https://openweathermap.org/img/wn/${w.icon}@2x.png`;
   iconEl.alt = w.description;
   result.classList.remove("hidden");
+
+  // Apply day/night theme
+  if (w.isDay) {
+    document.body.classList.add('day-theme');
+    document.body.classList.remove('night-theme');
+  } else {
+    document.body.classList.add('night-theme');
+    document.body.classList.remove('day-theme');
+  }
 
   // 5-day forecast
   forecastEl.innerHTML = "";
