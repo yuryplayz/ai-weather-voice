@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Welcome to Mr. WorldWideWeather</title>
+        <link rel="stylesheet" href="style.css">
+        <style>
+            .quote-section {
+                position: fixed;
+                left: 0; right: 0; bottom: 0;
+                background: #171a20;
+                color: #fff;
+                padding: 24px 0 80px 0;
+                text-align: center;
+                border-top: 1px solid #2b2f36;
+            }
+            .quote {
+                font-size: 1.8em;
+                font-style: italic;
+                margin-bottom: 12px;
+            }
+            .home-btn {
+                margin-top: 18px;
+                padding: 10px 24px;
+                border-radius: 10px;
+                border: none;
+                background: #5b9cff;
+                color: #fff;
+                font-size: 1em;
+                cursor: pointer;
+            }
+            .home-btn:hover { filter: brightness(1.1); }
+        </style>
+</head>
+<body>
+    <div class="container">
+    <h1 style="text-align:center; font-size:3em; margin-top:40px;">Welcome to <br> Mr. WorldWideWeather</h1>
+        <p style="text-align:center; font-size:1.4em;">Your daily dose of weather, music, and inspiration from Mr. 305 himself.</p>
+    </div>
+    <div class="quote-section">
+        <div class="quote" id="pitbull-quote"></div>
+        <button class="home-btn" onclick="location.href='index.html'">Go to Home Page</button>
+    </div>
+    <script>
+        const pitbullQuotes = [
+            "Every day above ground is a great day. Remember that.",
+            "Ask for money, and get advice. Ask for advice, get money twice.",
+            "Turn a negative to a positive.",
+            "Reach, dream, believe.",
+            "Patience, passion, and perseverance equals success.",
+            "The only failure is not trying."
+        ];
+        function showRandomQuote() {
+            const quote = pitbullQuotes[Math.floor(Math.random() * pitbullQuotes.length)];
+            document.getElementById('pitbull-quote').textContent = quote;
+        }
+        showRandomQuote();
+    </script>
+</body>
+</html>
+
+
