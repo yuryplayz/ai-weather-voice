@@ -137,8 +137,8 @@ function speak(text) {
 }
 
 function playMusicFor(w) {
-  let src = "assets/default.mp3";
-  if (w.main.includes("rain")) src = "assets/rain.mp3";
+  let src = "assets/default.mp4";
+  if (w.main.includes("rain")) src = "Songs/Rain Over Me - PitBull Snippet.m4a";
   else if (w.main.includes("snow")) src = "assets/snow.mp3";
   else if (w.main.includes("clear")) src = "assets/sunny.mp3";
 
