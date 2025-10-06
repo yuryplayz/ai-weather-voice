@@ -14,6 +14,7 @@ const music = document.getElementById("music");
 const forecastEl = document.getElementById("forecast");
 
 let latestForecast = null;
+let isCelsius = true;
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -58,8 +59,10 @@ async function fetchWeather(lat, lon) {
 }
 
 function normalizeWeather(city, country, data) {
-  const temp = Math.round(data.current.temp);
-  const feels = Math.round(data.current.feels_like);
+  const tempC = Math.round(data.current.temp);
+  const feelsC = Math.round(data.current.feels_like);
+  const tempF = Math.round((tempC * 9/5) + 32);
+  const feelsF = Math.round((feelsC * 9/5) + 32);
   const description = data.current.weather?.[0]?.description ?? "—";
   const icon = data.current.weather?.[0]?.icon ?? "01d";
   const main = data.current.weather?.[0]?.main?.toLowerCase() ?? "";
@@ -67,14 +70,20 @@ function normalizeWeather(city, country, data) {
   const sunrise = data.current.sunrise;
   const sunset = data.current.sunset;
   const isDay = currentTime >= sunrise && currentTime < sunset;
-  return { name: `${city.toUpperCase()}, ${country.toUpperCase()}`, temp, feels, description, icon, main, isDay };
+  return { name: `${city.toUpperCase()}, ${country.toUpperCase()}`, tempC, feelsC, tempF, feelsF, description, icon, main, isDay };
 }
 
 function render(w, daily) {
   placeEl.textContent = w.name;
   descEl.textContent = capitalize(w.description);
-  tempEl.textContent = `${w.temp}°C`;
-  feelsEl.textContent = `Feels like ${w.feels}°C`;
+
+  // Display temperature based on current unit preference
+  const currentTemp = isCelsius ? w.tempC : w.tempF;
+  const currentFeels = isCelsius ? w.feelsC : w.feelsF;
+  const tempUnit = isCelsius ? '°C' : '°F';
+
+  tempEl.textContent = `${currentTemp}${tempUnit}`;
+  feelsEl.textContent = `Feels like ${currentFeels}${tempUnit}`;
   iconEl.src = `https://openweathermap.org/img/wn/${w.icon}@2x.png`;
   iconEl.alt = w.description;
   result.classList.remove("hidden");
@@ -98,14 +107,14 @@ function render(w, daily) {
     const options = { weekday: "short" };
     const dayName = date.toLocaleDateString(undefined, options);
 
-    const tempDay = Math.round(day.temp.day);
+    const tempDay = isCelsius ? Math.round(day.temp.day) : Math.round((day.temp.day * 9/5) + 32);
     const icon = day.weather?.[0]?.icon ?? "01d";
     const desc = capitalize(day.weather?.[0]?.description ?? "");
 
     card.innerHTML = `
       <h4>${dayName}</h4>
       <img src="https://openweathermap.org/img/wn/${icon}.png" alt="${desc}" />
-      <p>${tempDay}°C</p>
+      <p>${tempDay}${tempUnit}</p>
       <p>${desc}</p>
     `;
     forecastEl.appendChild(card);
@@ -142,6 +151,18 @@ function capitalize(s) {
 }
 
 speechSynthesis.onvoiceschanged = () => {};
+
+// Temperature toggle functionality
+const tempToggle = document.getElementById('temp-toggle');
+tempToggle.addEventListener('click', function() {
+  isCelsius = !isCelsius;
+  this.textContent = isCelsius ? '°C' : '°F';
+
+  // Re-render if we have forecast data
+  if (latestForecast) {
+    render(latestForecast, []);
+  }
+});
 
 //buttons on sidebar
 document.getElementById('homeBtn').onclick = function () {

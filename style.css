@@ -203,3 +203,27 @@ body.night-theme .forecast-card {
 body.night-theme h1 {
   color: #eaecee;
 }
+
+/* Temperature Toggle Button Styling */
+#temp-toggle {
+  transition: all 0.3s ease;
+  font-weight: bold;
+  border-radius: 20px !important;
+}
+
+#temp-toggle:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+body.day-theme #temp-toggle {
+  background: linear-gradient(45deg, #FF8C00, #FF4500) !important;
+  color: #2c3e50 !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+body.night-theme #temp-toggle {
+  background: #5b9cff !important;
+  color: #fff !important;
+  border: none !important;
+}
