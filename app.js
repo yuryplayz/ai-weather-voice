@@ -14,6 +14,7 @@ const music = document.getElementById("music");
 const forecastEl = document.getElementById("forecast");
 
 let latestForecast = null;
+let latestDailyForecast = null;
 let isCelsius = true;
 
 form.addEventListener("submit", async (e) => {
@@ -24,6 +25,7 @@ form.addEventListener("submit", async (e) => {
     const coords = await getCoordinates(city);
     const data = await fetchWeather(coords.lat, coords.lon);
     latestForecast = normalizeWeather(city, coords.country, data);
+    latestDailyForecast = data.daily; // Store the daily forecast data
     render(latestForecast, data.daily);
     playMusicFor(latestForecast);
   } catch (err) {
@@ -159,8 +161,8 @@ tempToggle.addEventListener('click', function() {
   this.textContent = isCelsius ? '°C' : '°F';
 
   // Re-render if we have forecast data
-  if (latestForecast) {
-    render(latestForecast, []);
+  if (latestForecast && latestDailyForecast) {
+    render(latestForecast, latestDailyForecast);
   }
 });
 
