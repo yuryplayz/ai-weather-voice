@@ -140,9 +140,22 @@ body.day-theme button {
 }
 
 body.day-theme .forecast-card {
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   color: #2c3e50;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+body.day-theme .forecast-card h4 {
+  color: #1e3a8a;
+}
+
+body.day-theme .forecast-card p:first-of-type {
+  color: #1f2937;
+}
+
+body.day-theme .forecast-card p:last-of-type {
+  color: #6b7280;
 }
 
 body.day-theme h1 {
