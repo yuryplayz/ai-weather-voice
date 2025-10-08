@@ -240,3 +240,16 @@ body.night-theme #temp-toggle {
   color: #fff !important;
   border: none !important;
 }
+
+li {
+  margin-bottom: 40px; /* Adds 40px space below each list item */
+  text-align: left; 
+  margin-left: 19%;
+}
+
+audio {
+  display:block; 
+  margin: 20px auto; 
+  width :100%; 
+  max-width:400px;
+}
