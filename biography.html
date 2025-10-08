@@ -6,15 +6,65 @@
 </head>
 <body style="font-family: Arial, sans-serif; margin: 0; background: #0f1115; color: #eee;">
     <div style="display: flex; min-height: 100vh;">
-        <!-- Left sidebar -->
-        <div style="width: 200px; background:#0f1115; height:30vh; padding:20px; display:flex; flex-direction:column; gap:10px;">
-            <div style="display:flex; flex-direction:column; gap:10px;">
-                <button onclick="location.href='home.html'" style="padding:10px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">HomePage</button>
-                <button onclick="location.href='index.html'" style="padding:10px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">Weather</button>
-                <button style="padding:10px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">Biography</button>
-                <button onclick="location.href='songs.html'" style="padding:10px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">Songs</button>
-            </div>
-        </div>
+                <!-- Left sidebar -->
+                <style>
+                    .sidebar {
+                        width: 200px;
+                        background: #0f1115;
+                        height: 30vh;
+                        padding: 20px;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
+                        align-items: center;
+                        transition: transform 0.3s cubic-bezier(.68,-0.55,.27,1.55);
+                        transform: translateX(-180px);
+                        position: relative;
+                        z-index: 10;
+                    }
+                    .sidebar.open {
+                        transform: translateX(0);
+                    }
+                    .sidebar-toggle {
+                        position: absolute;
+                        left: 200px;
+                        top: 30px;
+                        background: #5b9cff;
+                        color: #fff;
+                        border: none;
+                        border-radius: 50%;
+                        width: 36px;
+                        height: 36px;
+                        font-size: 1.5em;
+                        cursor: pointer;
+                        z-index: 20;
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        transition: left 0.3s cubic-bezier(.68,-0.55,.27,1.55);
+                    }
+                    .sidebar:not(.open) + .sidebar-toggle {
+                        left: 20px;
+                    }
+                </style>
+                <div class="sidebar" id="sidebar">
+                        <button onclick="location.href='home.html'" style="padding:10px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">HomePage</button>
+                        <button onclick="location.href='index.html'" style="padding:10px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">Weather</button>
+                        <button style="padding:10px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">Biography</button>
+                        <button onclick="location.href='songs.html'" style="padding:10px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">Songs</button>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">&#9654;</button>
+                <script>
+                    const sidebar = document.getElementById('sidebar');
+                    const toggleBtn = document.getElementById('sidebarToggle');
+                    let open = false;
+                    toggleBtn.onclick = function() {
+                        open = !open;
+                        sidebar.classList.toggle('open', open);
+                        toggleBtn.innerHTML = open ? '&#9664;' : '&#9654;';
+                    };
+                </script>
         <!-- Main content -->
         <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
             <div style="max-width: 800px; width:100%; background: #222; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
