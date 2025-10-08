@@ -1,92 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Songs Used</title>
-    <link rel="stylesheet" href="style.css" />
-</head>
-<body style="font-family: Arial, sans-serif; margin: 0; background: #0f1115; color: #eee;">
-    <div style="display: flex; min-height: 100vh;">
-                <!-- Left sidebar -->
-                <style>
-                    .sidebar {
-                        width: 200px;
-                        background: #0f1115;
-                        height: 30vh;
-                        padding: 20px;
-                        display: flex;
-                        flex-direction: column;
-                        gap: 10px;
-                        align-items: center;
-                        transition: transform 0.3s cubic-bezier(.68,-0.55,.27,1.55);
-                        transform: translateX(-180px);
-                        position: relative;
-                        z-index: 10;
-                    }
-                    .sidebar.open {
-                        transform: translateX(0);
-                    }
-                    .sidebar-toggle {
-                        position: absolute;
-                        left: 200px;
-                        top: 30px;
-                        background: #5b9cff;
-                        color: #fff;
-                        border: none;
-                        border-radius: 50%;
-                        width: 36px;
-                        height: 36px;
-                        font-size: 1.5em;
-                        cursor: pointer;
-                        z-index: 20;
-                        box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        transition: left 0.3s cubic-bezier(.68,-0.55,.27,1.55);
-                    }
-                    .sidebar:not(.open) + .sidebar-toggle {
-                        left: 20px;
-                    }
-                </style>
-                <div class="sidebar" id="sidebar">
-                        <button onclick="location.href='home.html'" style="padding:20px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">HomePage</button>
-                        <button onclick="location.href='index.html'" style="padding:20px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">Weather</button>
-                        <button onclick="location.href='biography.html'" style="padding:20px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">Biography</button>
-                        <button onclick="location.href='songs.html'" style="padding:20px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">Songs</button>
-                </div>
-                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">&#9654;</button>
-                <script>
-                    const sidebar = document.getElementById('sidebar');
-                    const toggleBtn = document.getElementById('sidebarToggle');
-                    let open = false;
-                    toggleBtn.onclick = function() {
-                        open = !open;
-                        sidebar.classList.toggle('open', open);
-                        toggleBtn.innerHTML = open ? '&#9664;' : '&#9654;';
-                    };
-                </script>
-        <!-- Main content -->
-        <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
-            <div style="max-width: 800px; width:100%; background: #222; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-                        <h1 style="text-align: center; margin-bottom: 40px;">Songs Used on this Website</h1>
-                        <ul style="min-height: 600px; list-style-position: inside; padding-left: 0;">
-                    <li>"Give Me Everything" by Pitbull ft. Ne-Yo, Afrojack, Nayer <a href="https://www.youtube.com/watch?v=EPo5wWmKEaI" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
-                    <li>"Timber" by Pitbull ft. Kesha <a href="https://www.youtube.com/watch?v=hHUbLv4ThOo" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
-                    <li>"On The Floor" by Jennifer Lopez ft. Pitbull <a href="https://www.youtube.com/watch?v=t4H_Zoh7G5A" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
-                    <li>"I Know You Want Me (Calle Ocho)" by Pitbull <a href="https://www.youtube.com/watch?v=E2tMV96xULk" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
-                    <li>"Hotel Room Service" by Pitbull <a href="https://www.youtube.com/watch?v=2up_Eq6r6Ko" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
-                    <li>"Culo" by Pitbull ft. Lil Jon <a href="https://www.youtube.com/watch?v=E3VtH_t3V4c" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
-                    <li>"Rain Over Me" by Pitbull ft. Marc Anthony <a href="https://www.youtube.com/watch?v=SmM0653YvXU" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
-                    <li>"Fireball" by Pitbull ft. John Ryan <a href="https://www.youtube.com/watch?v=HMqgVXSvwGo" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
-                    <li>"Feel This Moment" by Pitbull ft. Christina Aguilera <a href="https://www.youtube.com/watch?v=5jlI4uzZGjU" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
-                    </ul>
-                    <audio controls style="position: absolute; top: 80px; left: 100px;">
-                        <source src="Songs/Feel This Moment - PitBull.m4a" type="audio/mp4">
-                    </audio>
-            </div>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Songs Used</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body style="font-family: Arial, sans-serif; margin: 0; background: #0f1115; color: #eee;">
+        <div style="display: flex; min-height: 100vh;">
+                    <!-- Left sidebar -->
+                    <style>
+                        .sidebar {
+                            width: 200px;
+                            background: #0f1115;
+                            height: 30vh;
+                            padding: 20px;
+                            display: flex;
+                            flex-direction: column;
+                            gap: 10px;
+                            align-items: center;
+                            transition: transform 0.3s cubic-bezier(.68,-0.55,.27,1.55);
+                            transform: translateX(-180px);
+                            position: relative;
+                            z-index: 10;
+                        }
+                        .sidebar.open {
+                            transform: translateX(0);
+                        }
+                        .sidebar-toggle {
+                            position: absolute;
+                            left: 200px;
+                            top: 30px;
+                            background: #5b9cff;
+                            color: #fff;
+                            border: none;
+                            border-radius: 50%;
+                            width: 36px;
+                            height: 36px;
+                            font-size: 1.5em;
+                            cursor: pointer;
+                            z-index: 20;
+                            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            transition: left 0.3s cubic-bezier(.68,-0.55,.27,1.55);
+                        }
+                        .sidebar:not(.open) + .sidebar-toggle {
+                            left: 20px;
+                        }
+                    </style>
+                    <div class="sidebar" id="sidebar">
+                            <button onclick="location.href='home.html'" style="padding:20px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">HomePage</button>
+                            <button onclick="location.href='index.html'" style="padding:20px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">Weather</button>
+                            <button onclick="location.href='biography.html'" style="padding:20px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">Biography</button>
+                            <button onclick="location.href='songs.html'" style="padding:20px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">Songs</button>
+                    </div>
+                    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">&#9654;</button>
+                    <script>
+                        const sidebar = document.getElementById('sidebar');
+                        const toggleBtn = document.getElementById('sidebarToggle');
+                        let open = false;
+                        toggleBtn.onclick = function() {
+                            open = !open;
+                            sidebar.classList.toggle('open', open);
+                            toggleBtn.innerHTML = open ? '&#9664;' : '&#9654;';
+                        };
+                    </script>
+            <!-- Main content -->
+            <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
                 
+                <div style="max-width: 800px; width:100%; background: #222; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+                    
+                    <h1 style="text-align: center; margin-bottom: 30px;">Songs Used on this Website</h1>
+                    
+                    <ul style="min-height: 600px; list-style-position: inside; padding-left: 0;">
+                        
+                        <li>"Give Me Everything" by Pitbull ft. Ne-Yo, Afrojack, Nayer <a href="https://www.youtube.com/watch?v=EPo5wWmKEaI" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
+                        <audio controls src="Songs/Give Me Everything - PitBull.m4a" type="audio/mp4"></audio>
+                        
+                        <li>"Timber" by Pitbull ft. Kesha <a href="https://www.youtube.com/watch?v=hHUbLv4ThOo" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
+                        <audio controls src="Songs/Timber - PitBull.m4a" type="audio/mp4"></audio>
+                        
+                        <li>"On The Floor" by Jennifer Lopez ft. Pitbull <a href="https://www.youtube.com/watch?v=t4H_Zoh7G5A" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
+                        <audio controls src="Songs/On The Floor - PitBull.m4a" type="audio/mp4"></audio>
+
+                        <li>"I Know You Want Me (Calle Ocho)" by Pitbull <a href="https://www.youtube.com/watch?v=E2tMV96xULk" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
+                        <audio controls src="Songs/I Know You Want Me (Calle Ocho) - PitBull.m4a" type="audio/mp4"></audio>
+                        <li>"Hotel Room Service" by Pitbull <a href="https://www.youtube.com/watch?v=2up_Eq6r6Ko" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
+                        <audio controls src="Songs/Hotel Room Service - PitBull.m4a" type="audio/mp4"></audio>
+
+                        <li>"Culo" by Pitbull ft. Lil Jon <a href="https://www.youtube.com/watch?v=E3VtH_t3V4c" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
+                        <audio controls src="Songs/Culo - PitBull.m4a" type="audio/mp4"></audio>
+                        
+                        <li>"Rain Over Me" by Pitbull ft. Marc Anthony <a href="https://www.youtube.com/watch?v=SmM0653YvXU" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
+                        <audio controls src="Songs/Rain Over Me - PitBull.m4a" type="audio/mp4"></audio>
+                        
+                        <li>"Fireball" by Pitbull ft. John Ryan <a href="https://www.youtube.com/watch?v=HMqgVXSvwGo" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
+                        <audio controls src="Songs/Fireball - PitBull.m4a" type="audio/mp4"></audio>
+                        
+                        <li>"Feel This Moment" by Pitbull ft. Christina Aguilera <a href="https://www.youtube.com/watch?v=5jlI4uzZGjU" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
+                        <audio controls src="Songs/Feel This Moment - PitBull.m4a" type="audio/mp4"></audio>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>
