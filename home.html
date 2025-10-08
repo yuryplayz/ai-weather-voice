@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Welcome to Mr. WorldWideWeather</title>
+        <title>Welcome to Mr. WorldWide Weather Weather</title>
         <link rel="stylesheet" href="style.css">
         <style>
             .quote-section {
@@ -43,15 +43,33 @@
 
     <div class="quote-section">
         <div class="quote" id="pitbull-quote"></div>
-        <button class="home-btn" onclick="location.href='index.html'">Go to Home Page</button>
-    </div>
+        <button class="home-btn" id = "home-btn">Go to Home Page</button>
+        <audio id= "pitbull-audio" src="Songs/Mr WorldWide Snippet.m4a" type="audio/mp4"></audio>
+        </div>
+        <div>
+            <audio id="pitbull-audio" style="display:none;">
+            <source src="Songs/Mr WorldWide Snippet.m4a" type="audio/mp4">
+            </audio>
+
+            <script>
+                const button = document.getElementById("home-btn");
+                const audio = document.getElementById('pitbull-audio');
+
+                button.addEventListener('click', () => {
+                    audio.play();
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    },2000)
+                });
+            </script>
+
+        </div>
     <script>
         const pitbullQuotes = [
             "Every day above ground is a great day. Remember that.",
             "Ask for money, and get advice. Ask for advice, get money twice.",
             "Turn a negative to a positive.",
             "Reach, dream, believe.",
-            "Patience, passion, and perseverance equals success.",
             "The only failure is not trying.",
             "It's not about making it. It's about maintaining it.",
             "There's no success without failure and no winning without losing.",
@@ -60,14 +78,13 @@
             "The only limits are the ones you create in your mind.",
             "I'm that chico that'll take your girl and teach her all the right things.",
             "Mommy got an ass like a donkey, with a monkey... look like King Kong."
-           
         ];
         function showRandomQuote() {
             const quote = pitbullQuotes[Math.floor(Math.random() * pitbullQuotes.length)];
             document.getElementById('pitbull-quote').textContent = quote;
         }
         showRandomQuote();
-
+        
         // Add keyboard event listener for number 9
         document.addEventListener('keydown', function(event) {
             if (event.key === '9') {
