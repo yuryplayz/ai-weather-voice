@@ -100,13 +100,53 @@
     background: #5b9cff;
     color: #fff;
   }
+
+  .sidebar-btn {
+    padding: 20px;
+    width: 150px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s ease;
+  }
+
+  .sidebar-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+  }
+
+  .sidebar-btn.active {
+    background: #5b9cff;
+    color: #fff;
+  }
+
+  body.day-theme .sidebar-btn {
+    background: linear-gradient(45deg, #FFA500, #FF6347);
+    color: #2c3e50;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  body.day-theme .sidebar-btn:hover {
+    background: linear-gradient(45deg, #FF8C00, #FF4500);
+    filter: brightness(1.1);
+  }
+
+  body.night-theme .sidebar-btn {
+    background: #5b9cff;
+    color: #fff;
+  }
+
+  body.night-theme .sidebar-btn:hover {
+    background: #4a8ae8;
+  }
 </style>
 
 <div class="sidebar" id = "sidebar" >
-  <button onclick="location.href='home.html'" style="padding:20px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">HomePage</button>
-  <button style="padding:20px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">Weather</button>
-  <button onclick="location.href='biography.html'" style="padding:20px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">Biography</button>
-  <button onclick="location.href='songs.html'" style="padding:20px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">Songs</button>
+  <button class="sidebar-btn" onclick="location.href='home.html'">HomePage</button>
+  <button class="sidebar-btn active">Weather</button>
+  <button class="sidebar-btn" onclick="location.href='biography.html'">Biography</button>
+  <button class="sidebar-btn" onclick="location.href='songs.html'">Songs</button>
 </div>
 <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">&#9654;</button>
 <script>

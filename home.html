@@ -6,12 +6,11 @@
         <link rel="stylesheet" href="style.css">
         <style>
             .quote-section {
-                background: #171a20;
-                color: #fff;
                 padding: 24px 0 80px 0;
                 text-align: center;
                 border-top: 1px solid #2b2f36;
                 margin-top: 40px;
+                transition: all 0.3s ease;
             }
             .quote {
                 font-size: 1.8em;
@@ -23,12 +22,39 @@
                 padding: 10px 24px;
                 border-radius: 10px;
                 border: none;
-                background: #5b9cff;
-                color: #fff;
                 font-size: 1em;
                 cursor: pointer;
+                transition: all 0.3s ease;
             }
             .home-btn:hover { filter: brightness(1.1); }
+
+            /* Theme support for quote section */
+            body.night-theme .quote-section {
+                background: #171a20;
+                color: #fff;
+                border-top: 1px solid #2b2f36;
+            }
+
+            body.day-theme .quote-section {
+                background: rgba(255, 255, 255, 0.8);
+                color: #2c3e50;
+                border-top: 1px solid rgba(0, 0, 0, 0.1);
+            }
+
+            body.night-theme .home-btn {
+                background: #5b9cff;
+                color: #fff;
+            }
+
+            body.day-theme .home-btn {
+                background: linear-gradient(45deg, #FFA500, #FF6347);
+                color: #2c3e50;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+            }
+
+            body.day-theme .home-btn:hover {
+                background: linear-gradient(45deg, #FF8C00, #FF4500);
+            }
         </style>
 </head>
 <body>
