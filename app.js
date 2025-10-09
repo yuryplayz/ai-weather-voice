@@ -139,13 +139,13 @@ function speak(text) {
 }
 
 function playMusicFor(w) {
-  let src = "Songs/Don't Stop the Party - PitBull Snippet.m4a"; // default
+  let src = "Songs/I Know You Want Me - PitBull Snippet.m4a"; // default
   if (w.main.includes("rain")) src = "Songs/Rain Over Me - PitBull Snippet.m4a";
   else if (w.main.includes("snow")) src = "Songs/Time of our Lives - PitBull Snippet.m4a";
   else if (w.main.includes("clear")) src = "Songs/Fireball - PitBull Snippet.m4a";
-  else if (w.main.includes("cloud")) src = "Songs/Give Me Everything - PitBull Snippet.m4a";
-  else if (w.main.includes("thunder")) src = "Songs/";
-  else if (w.main.includes("mist") || w.main.includes("fog")) src = "Songs/";
+  else if (w.main.includes("cloud")) src = "Songs/Don't Stop the Party - PitBull Snippet.m4a";
+  else if (w.main.includes("thunder")) src = "Songs/Timber - PitBull Snippet.m4a";
+  else if (w.main.includes("mist") || w.main.includes("fog")) src = "Songs/I Know You Want Me - PitBull Snippet.m4a";
 
   music.src = src;
   music.play().catch(() => {});
