@@ -143,6 +143,9 @@ function playMusicFor(w) {
   if (w.main.includes("rain")) src = "Songs/Rain Over Me - PitBull Snippet.m4a";
   else if (w.main.includes("snow")) src = "Songs/Time of our Lives - PitBull Snippet.m4a";
   else if (w.main.includes("clear")) src = "Songs/Fireball - PitBull Snippet.m4a";
+  else if (w.main.includes("cloud")) src = "Songs/Give Me Everything - PitBull Snippet.m4a";
+  else if (w.main.includes("thunder")) src = "Songs/";
+  else if (w.main.includes("mist") || w.main.includes("fog")) src = "Songs/";
 
   music.src = src;
   music.play().catch(() => {});
