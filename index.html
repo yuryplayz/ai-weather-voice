@@ -87,65 +87,15 @@
     const toggleBtn = document.getElementById('sidebarToggle');
     let open = false;
 
-<<<<<<< HEAD
     toggleBtn.onclick = function () {
       open = !open;
       sidebar.classList.toggle('open', open);
       toggleBtn.innerHTML = open ? '&#9664;' : '&#9654;';
     };
   </script>
-=======
-<style>
-  .sidebar {
-    position: absolute;
-    top: 0; left: 0;
-    width: 200px;
-    background: #0f1115;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-    transition: transform 0.3s cubic-bezier(.68,-0.55,.27,1.55), opacity 0.3s;
-    z-index: 10;
-    transform: translateX(-180px);
-    opacity: 0;
-    pointer-events: none;
-  }
-  .sidebar.open {
-    transform: translateX(0);
-    opacity: 1;
-    pointer-events: auto;
-  }
-  .sidebar-toggle {
-    position: absolute;
-    left: 200px;
-    top: 30px;
-    background: #5b9cff;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    font-size: 1.5em;
-    cursor: pointer;
-    z-index: 20;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: left 0.3s cubic-bezier(.68,-0.55,.27,1.55);
-  }
-  .sidebar:not(.open) + .sidebar-toggle {
-    left: 20px;
-  }
-   body.day-theme .sidebar {
-    background: rgba(255,255,255,0.9);
-  }
->>>>>>> ca936461a404fa92b5466786bbdb322052d975af
 
+  <!-- Sidebar styles -->
   <style>
-    /* Sidebar styles */
     .sidebar {
       position: absolute;
       top: 0;
