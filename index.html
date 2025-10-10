@@ -3,20 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AI Weather + Voice</title>
+  <title>Mr. Worldwide Weather</title>
+
+  <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
+
 <body>
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <button class="sidebar-btn" onclick="location.href='home.html'">HomePage</button>
+    <button class="sidebar-btn active">Weather</button>
+    <button class="sidebar-btn" onclick="location.href='biography.html'">Biography</button>
+    <button class="sidebar-btn" onclick="location.href='songs.html'">Songs</button>
+  </div>
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">&#9654;</button>
+
+  <!-- Main Weather Container -->
   <main class="container">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-      <h1> Mr. WorldWide Weather </h1>
-      <button id="temp-toggle" type="button" style="padding: 8px 12px; border-radius: 20px; border: none; background: #5b9cff; color: #fff; cursor: pointer; font-size: 0.9em;">°C</button>
+      <h1>Mr. Worldwide Weather</h1>
+      <button id="temp-toggle" type="button"
+        style="padding: 8px 12px; border-radius: 20px; border: none; background: #5b9cff; color: #fff; cursor: pointer; font-size: 0.9em;">
+        °C
+      </button>
     </div>
 
     <form id="search-form">
       <input id="city" type="text" placeholder="Search a city (e.g., Lisbon)" required />
       <button type="submit">Get Forecast</button>
     </form>
+
     <section id="result" class="card hidden">
       <div class="row">
         <div>
@@ -34,132 +55,180 @@
 
       <audio id="music"></audio>
 
-      <!-- New 5-day forecast -->
+      <!-- 5-day forecast -->
       <div id="forecast" class="forecast"></div>
+
+      <!-- Map container -->
+      <div id="map-container" class="map-container hidden">
+        <div id="map"></div>
+        <div class="map-controls">
+          <button id="zoom-in" class="map-btn">Zoom In</button>
+          <button id="zoom-out" class="map-btn">Zoom Out</button>
+          <button id="toggle-streets" class="map-btn">Toggle Streets</button>
+          <button id="close-map" class="map-btn">Close Map</button>
+        </div>
+      </div>
     </section>
   </main>
 
+  <!-- 🔄 Loading overlay -->
+  <div id="loading-overlay" class="hidden">
+    <div class="spinner"></div>
+    <p>Loading weather data...</p>
+  </div>
+
+  <!-- Scripts -->
   <script src="config.js"></script>
   <script src="app.js"></script>
 
+  <!-- Sidebar toggle logic -->
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('sidebarToggle');
+    let open = false;
 
-<style>
-  .sidebar {
-    position: absolute;
-    top: 0; left: 0;
-    width: 200px;
-    background: #0f1115;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-    transition: transform 0.3s cubic-bezier(.68,-0.55,.27,1.55);
-    z-index: 10;
-    transform: translateX(-180px);
-  }
-  .sidebar.open {
-    transform: translateX(0);
-  }
-  .sidebar-toggle {
-    position: absolute;
-    left: 200px;
-    top: 30px;
-    background: #5b9cff;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    font-size: 1.5em;
-    cursor: pointer;
-    z-index: 20;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: left 0.3s cubic-bezier(.68,-0.55,.27,1.55);
-  }
-  .sidebar:not(.open) + .sidebar-toggle {
-    left: 20px;
-  }
-   body.day-theme .sidebar {
-    background: rgba(255,255,255,0.9);
-  }
+    toggleBtn.onclick = function () {
+      open = !open;
+      sidebar.classList.toggle('open', open);
+      toggleBtn.innerHTML = open ? '&#9664;' : '&#9654;';
+    };
+  </script>
 
-  body.day-theme .sidebar button {
-    background: linear-gradient(45deg, #FFA500, #FF6347);
-    color: #2c3e50;
-  }
+  <style>
+    /* Sidebar styles */
+    .sidebar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200px;
+      background: #0f1115;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      transition: transform 0.3s cubic-bezier(.68, -0.55, .27, 1.55);
+      z-index: 10;
+      transform: translateX(-180px);
+    }
 
-  body.night-theme .sidebar {
-    background: #0f1115;
-  }
+    .sidebar.open {
+      transform: translateX(0);
+    }
 
-  body.night-theme .sidebar button {
-    background: #5b9cff;
-    color: #fff;
-  }
+    .sidebar-toggle {
+      position: absolute;
+      left: 200px;
+      top: 30px;
+      background: #5b9cff;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      font-size: 1.5em;
+      cursor: pointer;
+      z-index: 20;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: left 0.3s cubic-bezier(.68, -0.55, .27, 1.55);
+    }
 
-  .sidebar-btn {
-    padding: 20px;
-    width: 150px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: all 0.3s ease;
-  }
+    .sidebar:not(.open) + .sidebar-toggle {
+      left: 20px;
+    }
 
-  .sidebar-btn:hover {
-    filter: brightness(1.1);
-    transform: translateY(-2px);
-  }
+    /* Sidebar button styling */
+    .sidebar-btn {
+      padding: 20px;
+      width: 150px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: all 0.3s ease;
+    }
 
-  .sidebar-btn.active {
-    background: #5b9cff;
-    color: #fff;
-  }
+    .sidebar-btn:hover {
+      filter: brightness(1.1);
+      transform: translateY(-2px);
+    }
 
-  body.day-theme .sidebar-btn {
-    background: linear-gradient(45deg, #FFA500, #FF6347);
-    color: #2c3e50;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-  }
+    .sidebar-btn.active {
+      background: #5b9cff;
+      color: #fff;
+    }
 
-  body.day-theme .sidebar-btn:hover {
-    background: linear-gradient(45deg, #FF8C00, #FF4500);
-    filter: brightness(1.1);
-  }
+    body.day-theme .sidebar {
+      background: rgba(255, 255, 255, 0.9);
+    }
 
-  body.night-theme .sidebar-btn {
-    background: #5b9cff;
-    color: #fff;
-  }
+    body.day-theme .sidebar button {
+      background: linear-gradient(45deg, #FFA500, #FF6347);
+      color: #2c3e50;
+    }
 
-  body.night-theme .sidebar-btn:hover {
-    background: #4a8ae8;
-  }
-</style>
+    body.night-theme .sidebar {
+      background: #0f1115;
+    }
 
-<div class="sidebar" id = "sidebar" >
-  <button class="sidebar-btn" onclick="location.href='home.html'">HomePage</button>
-  <button class="sidebar-btn active">Weather</button>
-  <button class="sidebar-btn" onclick="location.href='biography.html'">Biography</button>
-  <button class="sidebar-btn" onclick="location.href='songs.html'">Songs</button>
-</div>
-<button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">&#9654;</button>
-<script>
-  const sidebar = document.getElementById('sidebar');
-  const toggleBtn = document.getElementById('sidebarToggle');
-  let open = false;
-  toggleBtn.onclick = function() {
-    open = !open;
-    sidebar.classList.toggle('open', open);
-    toggleBtn.innerHTML = open ? '&#9664;' : '&#9654;';
-  };
-</script>
+    body.night-theme .sidebar button {
+      background: #5b9cff;
+      color: #fff;
+    }
+
+    /* Map container styles */
+    .map-container {
+      margin-top: 20px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .map-controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.9);
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    body.night-theme .map-controls {
+      background: rgba(15, 17, 21, 0.9);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .map-btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: all 0.3s ease;
+    }
+
+    .map-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+    }
+
+    body.day-theme .map-btn {
+      background: linear-gradient(45deg, #FFA500, #FF6347);
+      color: #2c3e50;
+    }
+
+    body.night-theme .map-btn {
+      background: #5b9cff;
+      color: #fff;
+    }
+
+    .map-btn#close-map {
+      background: #e74c3c !important;
+      color: #fff !important;
+    }
+  </style>
 </body>
-
-
 </html>
