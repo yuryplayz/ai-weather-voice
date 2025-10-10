@@ -1,4 +1,4 @@
-// ✅ Load API key safely from config.js
+//Load API keyfrom config.js
 let OPENWEATHER_KEY = "";
 
 function loadAPIKey() {
@@ -15,9 +15,9 @@ if (!loadAPIKey()) {
   setTimeout(loadAPIKey, 600);
 }
 
-// ===========================
-// 🌍 ELEMENT REFERENCES
-// ===========================
+
+// ELEMENT REFERENCES
+
 const form = document.getElementById("search-form");
 const input = document.getElementById("city");
 const result = document.getElementById("result");
@@ -37,9 +37,9 @@ let latestForecast = null;
 let latestDailyForecast = null;
 let isCelsius = true;
 
-// ===========================
-// 🗺️ MAP INITIALIZATION
-// ===========================
+
+// MAP INITIALIZATION
+
 let map;
 let currentMarker = null;
 let streetsLayer = null;
@@ -48,7 +48,7 @@ let isStreetsVisible = true;
 document.addEventListener("DOMContentLoaded", () => {
   initMap();
   setTimeout(() => map?.invalidateSize(), 1000);
-  detectLocationAndLoadWeather(); // 🌎 auto-load local city
+  //detectLocationAndLoadWeather(); // 🌎 auto-load local city
 });
 
 function initMap() {
@@ -59,9 +59,9 @@ function initMap() {
   }).addTo(map);
 }
 
-// ===========================
-// 🌤️ WEATHER FETCH FUNCTIONS
-// ===========================
+
+// WEATHER FETCH FUNCTIONS
+
 async function getCoordinates(city) {
   const url = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(city)}&limit=1&appid=${OPENWEATHER_KEY}`;
   const res = await fetch(url);
@@ -83,9 +83,9 @@ async function fetchWeather(lat, lon) {
   return { current, forecast };
 }
 
-// ===========================
+
 // 🔊 EVENT LISTENERS
-// ===========================
+
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const city = input.value.trim();
@@ -127,9 +127,9 @@ tempToggle.addEventListener("click", () => {
   if (latestForecast && latestDailyForecast) render(latestForecast, latestDailyForecast);
 });
 
-// ===========================
-// 🎵 MUSIC BY WEATHER
-// ===========================
+
+//  MUSIC BY WEATHER
+
 function playMusicFor(w) {
   let src = "Songs/I Know You Want Me - PitBull Snippet.m4a";
   if (w.main.includes("rain")) src = "Songs/Rain Over Me - PitBull Snippet.m4a";
@@ -141,9 +141,9 @@ function playMusicFor(w) {
   music.play().catch(() => {});
 }
 
-// ===========================
-// 🗣️ SPEECH
-// ===========================
+
+//  SPEECH
+
 function forecastToSpeech(w) {
   return `Weather in ${w.name}. ${capitalize(w.description)}. Temperature ${w.tempC}°C, feels like ${w.feelsC}°C.`;
 }
@@ -158,9 +158,9 @@ function speak(text) {
   window.speechSynthesis.speak(utter);
 }
 
-// ===========================
-// 🌡️ RENDER UI
-// ===========================
+
+//  RENDER UI
+
 function normalizeWeather(city, country, data) {
   const tempC = Math.round(data.current.main.temp);
   const feelsC = Math.round(data.current.main.feels_like);
@@ -223,9 +223,9 @@ function groupForecastByDay(list) {
   }));
 }
 
-// ===========================
-// 🗺️ FIXED MAP FUNCTION + REFRESH
-// ===========================
+
+// MAP FUNCTION + REFRESH
+
 function showCityOnMap(lat, lon, name) {
   const container = document.getElementById("map-container");
   if (isNaN(lat) || isNaN(lon)) {
@@ -255,7 +255,7 @@ function showCityOnMap(lat, lon, name) {
     .addTo(map)
     .openPopup();
 
-  refreshMap(); // ✅ fix gray/half map
+  refreshMap(); // fix gray/half map
 }
 
 function refreshMap() {
@@ -263,9 +263,9 @@ function refreshMap() {
   setTimeout(() => map.invalidateSize(), 400);
 }
 
-// ===========================
-// 🔧 UTILITIES
-// ===========================
+
+//  UTILITIES
+
 function capitalize(s) {
   return s ? s[0].toUpperCase() + s.slice(1) : s;
 }
@@ -283,9 +283,9 @@ function showError(msg) {
   setTimeout(() => toast.remove(), 3000);
 }
 
-// ===========================
-// 🧭 AUTO-DETECT USER LOCATION
-// ===========================
+
+// AUTO-DETECT USER LOCATION
+
 async function detectLocationAndLoadWeather() {
   try {
     const res = await fetch("https://ipapi.co/json/");
