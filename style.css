@@ -19,7 +19,7 @@
   transform: scaleX(-1);
 }
 
-/* ============ Base Styles ============ */
+
 * { box-sizing: border-box; }
 
 html, body {
@@ -90,7 +90,7 @@ button:hover { filter: brightness(1.1); transform: scale(1.02); }
   margin-top: 12px;
 }
 
-/* ============ Forecast ============ */
+
 .forecast {
   display: flex;
   gap: 12px;
@@ -141,7 +141,7 @@ button:hover { filter: brightness(1.1); transform: scale(1.02); }
   color: #9da3ab;
 }
 
-/* ============ Animated Image ============ */
+
 .image-change {
   animation: grow-shrink 2s ease-in-out infinite alternate;
 }
@@ -151,7 +151,7 @@ button:hover { filter: brightness(1.1); transform: scale(1.02); }
   100% { transform: scale(1); }
 }
 
-/* ============ Day/Night Themes ============ */
+
 body.day-theme {
   background: linear-gradient(135deg, #87CEEB 0%, #98FB98 100%);
   color: #2c3e50;
@@ -196,7 +196,7 @@ body.day-theme h1 {
   text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
 }
 
-/* ============ Night Theme ============ */
+
 body.night-theme {
   background: #0f1115;
   color: #eaecee;
@@ -234,7 +234,7 @@ body.night-theme h1 {
   color: #eaecee;
 }
 
-/* ============ Temperature Toggle ============ */
+
 #temp-toggle {
   transition: all 0.3s ease;
   font-weight: bold;
@@ -256,7 +256,7 @@ body.night-theme #temp-toggle {
   border: none !important;
 }
 
-/* ============ Audio / List ============ */
+
 li { margin-left: 19%; }
 
 audio {
@@ -267,14 +267,14 @@ audio {
   width: 400px;
 }
 
-/* ============ Map Styling ============ */
+
 #map {
   height: 400px;
   width: 100%;
   border-radius: 8px;
 }
 
-/* Smooth fade-in for map */
+
 #map-container {
   opacity: 0;
   transform: scale(0.97);
@@ -286,14 +286,14 @@ audio {
   animation: mapGlow 1.5s ease-out;
 }
 
-/* Map glow pulse when shown */
+
 @keyframes mapGlow {
   0% { box-shadow: 0 0 0px rgba(91, 156, 255, 0); }
   40% { box-shadow: 0 0 20px rgba(91, 156, 255, 0.5); }
   100% { box-shadow: 0 0 0px rgba(91, 156, 255, 0); }
 }
 
-/* ============ Loading Overlay ============ */
+
 #loading-overlay {
   position: fixed;
   inset: 0;
@@ -319,7 +319,7 @@ audio {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ============ Error Toast ============ */
+
 .error-toast {
   position: fixed;
   bottom: 20px;
@@ -340,3 +340,4 @@ audio {
   90% { opacity: 1; }
   100% { opacity: 0; transform: translate(-50%, 20px); }
 }
+
