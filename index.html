@@ -16,7 +16,7 @@
 <body>
   <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
-    <button class="sidebar-btn" onclick="location.href='home.html'">HomePage</button>
+    <button class="sidebar-btn" onclick="location.href='home.html'">Home Page</button>
     <button class="sidebar-btn active">Weather</button>
     <button class="sidebar-btn" onclick="location.href='biography.html'">Biography</button>
     <button class="sidebar-btn" onclick="location.href='songs.html'">Songs</button>
@@ -51,6 +51,7 @@
       <div class="actions">
         <button type="button" id="speak-btn">🔊 Speak Forecast</button>
         <button type="button" id="stop-btn">⏹️ Stop</button>
+        <button type="button" id="stop-music-btn">🎵 Stop Music</button>
       </div>
 
       <audio id="music"></audio>
@@ -71,7 +72,7 @@
     </section>
   </main>
 
-  <!-- 🔄 Loading overlay -->
+  <!--Loading overlay -->
   <div id="loading-overlay" class="hidden">
     <div class="spinner"></div>
     <p>Loading weather data...</p>

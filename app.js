@@ -28,6 +28,7 @@ const feelsEl = document.getElementById("feels");
 const iconEl = document.getElementById("icon");
 const speakBtn = document.getElementById("speak-btn");
 const stopBtn = document.getElementById("stop-btn");
+const stopMusicBtn = document.getElementById("stop-music-btn");
 const music = document.getElementById("music");
 const forecastEl = document.getElementById("forecast");
 const tempToggle = document.getElementById("temp-toggle");
@@ -48,7 +49,7 @@ let isStreetsVisible = true;
 document.addEventListener("DOMContentLoaded", () => {
   initMap();
   setTimeout(() => map?.invalidateSize(), 1000);
-  //detectLocationAndLoadWeather(); // 🌎 auto-load local city
+
 });
 
 function initMap() {
@@ -84,7 +85,7 @@ async function fetchWeather(lat, lon) {
 }
 
 
-// 🔊 EVENT LISTENERS
+//  EVENT LISTENERS
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -95,11 +96,18 @@ form.addEventListener("submit", async (e) => {
 
 async function loadCityWeather(city) {
   showLoading(true);
+  music.pause();
+  music.currentTime = 0;
+  music.src = "Songs/Timber - PitBull Snippet.m4a"; 
+  music.play().catch(() => {});
   try {
     const coords = await getCoordinates(city);
     if (!coords || isNaN(coords.lat) || isNaN(coords.lon)) throw new Error("Invalid coordinates");
 
     const data = await fetchWeather(coords.lat, coords.lon);
+    await new Promise(resolve => setTimeout(resolve, 5000)); // Play International Love while loading
+    music.pause();
+    music.currentTime = 0;
     latestForecast = normalizeWeather(city, coords.country, data);
     latestDailyForecast = data.forecast;
 
@@ -120,6 +128,11 @@ speakBtn.addEventListener("click", () => {
 });
 
 stopBtn.addEventListener("click", () => window.speechSynthesis.cancel());
+
+stopMusicBtn.addEventListener("click", () => {
+  music.pause();
+  music.currentTime = 0;
+});
 
 tempToggle.addEventListener("click", () => {
   isCelsius = !isCelsius;
