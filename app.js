@@ -28,6 +28,8 @@ const feelsEl = document.getElementById("feels");
 const iconEl = document.getElementById("icon");
 const speakBtn = document.getElementById("speak-btn");
 const stopBtn = document.getElementById("stop-btn");
+const stopMusicBtn = document.getElementById("stop-music-btn");
+const quickLoadBtn = document.getElementById("quick-load-btn");
 const music = document.getElementById("music");
 const forecastEl = document.getElementById("forecast");
 const tempToggle = document.getElementById("temp-toggle");
@@ -36,6 +38,7 @@ const loadingOverlay = document.getElementById("loading-overlay");
 let latestForecast = null;
 let latestDailyForecast = null;
 let isCelsius = true;
+let quickMode = false;
 
 
 // MAP INITIALIZATION
@@ -43,12 +46,11 @@ let isCelsius = true;
 let map;
 let currentMarker = null;
 let streetsLayer = null;
-let isStreetsVisible = true;
 
 document.addEventListener("DOMContentLoaded", () => {
   initMap();
   setTimeout(() => map?.invalidateSize(), 1000);
-  //detectLocationAndLoadWeather(); // 🌎 auto-load local city
+
 });
 
 function initMap() {
@@ -84,7 +86,7 @@ async function fetchWeather(lat, lon) {
 }
 
 
-// 🔊 EVENT LISTENERS
+//  EVENT LISTENERS
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -96,16 +98,41 @@ form.addEventListener("submit", async (e) => {
 async function loadCityWeather(city) {
   showLoading(true);
   try {
+    if(!quickMode){ 
+      music.pause();
+      music.currentTime = 0;
+      music.src = "Songs/International Love - PitBull Snippet.m4a"; 
+      music.play().catch(() => {});
+      const messages = [
+        "Loading weather data...",
+        "Bringing International vibes...",
+        "Mr. Worldwide is checking the forecast...",
+        "305 to your city...",
+        "Weather information received..."
+      ];
+      const loadingText = document.querySelector("#loading-overlay p");
+      let msgIndex = 0;
+      var msgInterval = setInterval(() => {
+        msgIndex = (msgIndex + 1) % messages.length;
+        loadingText.textContent = messages[msgIndex];
+      }, 1000);
+    }
     const coords = await getCoordinates(city);
     if (!coords || isNaN(coords.lat) || isNaN(coords.lon)) throw new Error("Invalid coordinates");
 
     const data = await fetchWeather(coords.lat, coords.lon);
+    if(!quickMode){
+      await new Promise(resolve => setTimeout(resolve, 5150)); // delay for loading song
+      music.pause();
+      music.currentTime = 0;
+      clearInterval(msgInterval); 
+    }
     latestForecast = normalizeWeather(city, coords.country, data);
     latestDailyForecast = data.forecast;
-
     render(latestForecast, data);
     playMusicFor(latestForecast);
     showCityOnMap(coords.lat, coords.lon, `${city}, ${coords.country}`);
+
   } catch (err) {
     showError(err.message || "Could not fetch weather");
     console.error("❌ Error:", err);
@@ -114,12 +141,24 @@ async function loadCityWeather(city) {
   }
 }
 
+quickLoadBtn.addEventListener("click", async () => {
+    const city = input.value.trim();
+  if (!city) return;
+  quickMode = true;
+  await loadCityWeather(city);
+  quickMode = false;
+});
 speakBtn.addEventListener("click", () => {
   if (!latestForecast) return;
   speak(forecastToSpeech(latestForecast));
 });
 
 stopBtn.addEventListener("click", () => window.speechSynthesis.cancel());
+
+stopMusicBtn.addEventListener("click", () => {
+  music.pause();
+  music.currentTime = 0;
+});
 
 tempToggle.addEventListener("click", () => {
   isCelsius = !isCelsius;
@@ -302,12 +341,4 @@ async function detectLocationAndLoadWeather() {
 // Map controls
 document.getElementById("zoom-in").addEventListener("click", () => map.zoomIn());
 document.getElementById("zoom-out").addEventListener("click", () => map.zoomOut());
-document.getElementById("toggle-streets").addEventListener("click", () => {
-  if (isStreetsVisible) map.removeLayer(streetsLayer);
-  else streetsLayer.addTo(map);
-  isStreetsVisible = !isStreetsVisible;
-});
-document.getElementById("close-map").addEventListener("click", () => {
-  document.getElementById("map-container").classList.add("hidden");
-  map.setView([20, 0], 2);
-});
+

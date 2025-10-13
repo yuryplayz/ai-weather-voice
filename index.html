@@ -16,7 +16,7 @@
 <body>
   <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
-    <button class="sidebar-btn" onclick="location.href='home.html'">HomePage</button>
+    <button class="sidebar-btn" onclick="location.href='home.html'">Home Page</button>
     <button class="sidebar-btn active">Weather</button>
     <button class="sidebar-btn" onclick="location.href='biography.html'">Biography</button>
     <button class="sidebar-btn" onclick="location.href='songs.html'">Songs</button>
@@ -36,6 +36,7 @@
     <form id="search-form">
       <input id="city" type="text" placeholder="Search a city (e.g., Lisbon)" required />
       <button type="submit">Get Forecast</button>
+      <button type="button" id="quick-load-btn">⚡ Quick </button>
     </form>
 
     <section id="result" class="card hidden">
@@ -51,12 +52,14 @@
       <div class="actions">
         <button type="button" id="speak-btn">🔊 Speak Forecast</button>
         <button type="button" id="stop-btn">⏹️ Stop</button>
+        <button type="button" id="stop-music-btn">🎵 Stop Music</button>
       </div>
 
       <audio id="music"></audio>
 
       <!-- 5-day forecast -->
-      <div id="forecast" class="forecast"></div>
+      <div id="forecast" class="forecast">
+      </div>
 
       <!-- Map container -->
       <div id="map-container" class="map-container hidden">
@@ -64,14 +67,12 @@
         <div class="map-controls">
           <button id="zoom-in" class="map-btn">Zoom In</button>
           <button id="zoom-out" class="map-btn">Zoom Out</button>
-          <button id="toggle-streets" class="map-btn">Toggle Streets</button>
-          <button id="close-map" class="map-btn">Close Map</button>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- 🔄 Loading overlay -->
+  <!--Loading overlay -->
   <div id="loading-overlay" class="hidden">
     <div class="spinner"></div>
     <p>Loading weather data...</p>
