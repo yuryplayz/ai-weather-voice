@@ -342,3 +342,4 @@ async function detectLocationAndLoadWeather() {
 document.getElementById("zoom-in").addEventListener("click", () => map.zoomIn());
 document.getElementById("zoom-out").addEventListener("click", () => map.zoomOut());
 
+
