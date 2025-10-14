@@ -1,128 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Songs Used</title>
-        <link rel="stylesheet" href="style.css" />
-    </head>
-    <body style="font-family: Arial, sans-serif; margin: 0; background: #0f1115; color: #eee;">
-        <div style="display: flex; min-height: 100vh;">
-                    <!-- Left sidebar -->
-                    <style>
-                        .sidebar {
-                            width: 200px;
-                            background: #0f1115;
-                            height: 30vh;
-                            padding: 20px;
-                            display: flex;
-                            flex-direction: column;
-                            gap: 10px;
-                            align-items: center;
-                            transition: transform 0.3s cubic-bezier(.68,-0.55,.27,1.55);
-                            transform: translateX(-180px);
-                            position: relative;
-                            z-index: 10;
-                        }
-                        .sidebar.open {
-                            transform: translateX(0);
-                        }
-                        .sidebar-toggle {
-                            position: absolute;
-                            left: 200px;
-                            top: 30px;
-                            background: #5b9cff;
-                            color: #fff;
-                            border: none;
-                            border-radius: 50%;
-                            width: 36px;
-                            height: 36px;
-                            font-size: 1.5em;
-                            cursor: pointer;
-                            z-index: 20;
-                            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            transition: left 0.3s cubic-bezier(.68,-0.55,.27,1.55);
-                        }
-                        .sidebar:not(.open) + .sidebar-toggle {
-                            left: 20px;
-                        }
-                    </style>
-                    <div class="sidebar" id="sidebar">
-                            <button onclick="location.href='home.html'" style="padding:20px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">Home Page</button>
-                            <button onclick="location.href='index.html'" style="padding:20px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">Weather</button>
-                            <button onclick="location.href='biography.html'" style="padding:20px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">Biography</button>
-                            <button onclick="location.href='songs.html'" style="padding:20px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">Songs</button>
-                    </div>
-                    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">&#9654;</button>
-                    <script>
-                        const sidebar = document.getElementById('sidebar');
-                        const toggleBtn = document.getElementById('sidebarToggle');
-                        let open = false;
-                        toggleBtn.onclick = function() {
-                            open = !open;
-                            sidebar.classList.toggle('open', open);
-                            toggleBtn.innerHTML = open ? '&#9664;' : '&#9654;';
-                        };
-                    </script>
-            <!-- Main content -->
-            <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Songs Used</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body style="font-family: Arial, sans-serif; margin: 0; background: #0f1115; color: #eee;">
+    <div style="display: flex; min-height: 100vh;">
+        <!-- Left sidebar -->
+        <style>
+            .sidebar {
+                width: 200px;
+                background: #0f1115;
+                height: 30vh;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+                transition: transform 0.3s cubic-bezier(.68, -0.55, .27, 1.55);
+                transform: translateX(-180px);
+                position: relative;
+                z-index: 10;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .sidebar-toggle {
+                position: absolute;
+                left: 200px;
+                top: 30px;
+                background: #5b9cff;
+                color: #fff;
+                border: none;
+                border-radius: 50%;
+                width: 36px;
+                height: 36px;
+                font-size: 1.5em;
+                cursor: pointer;
+                z-index: 20;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: left 0.3s cubic-bezier(.68, -0.55, .27, 1.55);
+            }
+
+            .sidebar:not(.open)+.sidebar-toggle {
+                left: 20px;
+            }
+        </style>
+        <div class="sidebar" id="sidebar">
+            <button onclick="location.href='home.html'"
+                style="padding:20px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">Home
+                Page</button>
+            <button onclick="location.href='index.html'"
+                style="padding:20px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">Weather</button>
+            <button onclick="location.href='biography.html'"
+                style="padding:20px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">Biography</button>
+            <button onclick="location.href='songs.html'"
+                style="padding:20px; width:150px; border:none; border-radius:6px; background:#5b9cff; color:white; cursor:pointer;">Songs</button>
+        </div>
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">&#9654;</button>
+        <script>
+            const sidebar = document.getElementById('sidebar');
+            const toggleBtn = document.getElementById('sidebarToggle');
+            let open = false;
+            toggleBtn.onclick = function () {
+                open = !open;
+                sidebar.classList.toggle('open', open);
+                toggleBtn.innerHTML = open ? '&#9664;' : '&#9654;';
+            };
+        </script>
+        <!-- Main content -->
+        <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
+            <div style="max-width: 800px; width: 100%; background: #222; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); min-height: 800px;">
                 
-                <div style="max-width: 800px; width:100%; background: #222; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-                    
-                    <h1 style="text-align: center; margin-bottom: 30px;">Songs Used on this Website</h1>
-                    
-                    <ul style="min-height: 600px; list-style-position: inside; padding-left: 0;">
-                        
-
-                        <li>"Give Me Everything" by Pitbull ft. Ne-Yo, Afrojack, Nayer <a href="https://www.youtube.com/watch?v=EPo5wWmKEaI" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
-                        <audio controls src="Songs/Give Me Everything - PitBull.m4a" type="audio/mp4"></audio>
-                        
-                        <li>"Timber" by Pitbull ft. Kesha <a href="https://www.youtube.com/watch?v=hHUbLv4ThOo" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
-                        <audio controls src="Songs/Timber - PitBull.m4a" type="audio/mp4"></audio>
-                        
-                        <li>"On The Floor" by Jennifer Lopez ft. Pitbull <a href="https://www.youtube.com/watch?v=t4H_Zoh7G5A" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
-                        <audio controls src="Songs/On The Floor - PitBull.m4a" type="audio/mp4"></audio>
-
-                        <li>"I Know You Want Me (Calle Ocho)" by Pitbull <a href="https://www.youtube.com/watch?v=E2tMV96xULk" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
-                        <audio controls src="Songs/I Know You Want Me (Calle Ocho) - PitBull.m4a" type="audio/mp4"></audio>
-                        <li>"Hotel Room Service" by Pitbull <a href="https://www.youtube.com/watch?v=2up_Eq6r6Ko" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
-                        <audio controls src="Songs/Hotel Room Service - PitBull.m4a" type="audio/mp4"></audio>
-
-                        <li>"Culo" by Pitbull ft. Lil Jon <a href="https://www.youtube.com/watch?v=E3VtH_t3V4c" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
-                        <audio controls src="Songs/Culo - PitBull.m4a" type="audio/mp4"></audio>
-                        
-                        <li>"Rain Over Me" by Pitbull ft. Marc Anthony <a href="https://www.youtube.com/watch?v=SmM0653YvXU" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
-                        <audio controls src="Songs/Rain Over Me - PitBull.m4a" type="audio/mp4"></audio>
-                        
-                        <li>"Fireball" by Pitbull ft. John Ryan <a href="https://www.youtube.com/watch?v=HMqgVXSvwGo" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
-                        <audio controls src="Songs/Fireball - PitBull.m4a" type="audio/mp4"></audio>
-                        
-                        <li>"Feel This Moment" by Pitbull ft. Christina Aguilera <a href="https://www.youtube.com/watch?v=5jlI4uzZGjU" target="_blank" style="color:#4fc3f7;">[YouTube]</a></li>
-                        <audio controls src="Songs/Feel This Moment - PitBull.m4a" type="audio/mp4"></audio>
-                    
-                    </ul>
-                </div>
-              
-                <div style="
-                position: absolute;
-                top: 10px;
-                left: 300px;
-                z-index: 1000;
-                width: 150px; 
-                transform: scaleX(-1);">
-                    <img src="Images/music-notes-music.gif" alt="Music Notes" style="width:100%;height:auto;">
+                <!-- Centered Heading Above Slideshow -->
+                <div style="text-align: center; margin-bottom: 80px; margin-top: 50px;">
+                    <h1 style="color: white; font-size: 2em;">Songs Used on this Website</h1>
                 </div>
 
-                <div style="
-                position: absolute;
-                top: 10px;
-                right: 120px;
-                z-index: 1000;
-                width: 150px;">
-                    <img src="Images/pitbull.gif" alt="Decorative GIF" style="width:100%;height:auto;">
+                <!-- Slideshow container -->
+                <div class="slideshow-container">
+
+                    <div class="mySlides fade">
+
+                        <div class="video-wrapper">
+                            <iframe class="video-frame" src="https://www.youtube.com/embed/M7lc1UVf-VE"
+                                title="YouTube video player"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+
+                        <div class="text">Song 1</div>
+                    </div>
+
+                    <div class="mySlides fade">
+                        <img src="Images/pitbull.jfif" class="custom-image">
+                        <div class="text">Song 2</div>
+                    </div>
+
+                    <div class="mySlides fade">
+                        <img src="Images/A-History-of-Pitbulls-1.jpg" class="custom-image">
+                        <div class="text">Caption Three</div>
+                    </div>
+
+                    <!-- Navigation arrows -->
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                </div>
+
+                <!-- Dots -->
+                <br>
+                <div style="text-align:center;margin-top: 60px;">
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
                 </div>
             </div>
-        </body>
+        </div>
+        <!-- Decorative GIFs -->
+        <div>
+            <div class="top-left-gif flipped">
+                <img src="Images/music-notes-music.gif" alt="Music Notes" style="width:100%;height:auto;">
+            </div>
+
+            <div class="top-right-gif">
+                <img src="Images/pitbull.gif" alt="Decorative GIF" style="width:100%;height:auto;">
+            </div>
+        </div>
+
+        <!-- Slideshow Script -->
+        <script>
+
+            let slideIndex = 1;
+            showSlides(slideIndex);
+
+            // Next/previous controls
+            function plusSlides(n) {
+                showSlides(slideIndex += n);
+            }
+
+            // Thumbnail image controls
+            function currentSlide(n) {
+                showSlides(slideIndex = n);
+            }
+
+            function showSlides(n) {
+                let i;
+                let slides = document.getElementsByClassName("mySlides");
+                let dots = document.getElementsByClassName("dot");
+                if (n > slides.length) { slideIndex = 1 }
+                if (n < 1) { slideIndex = slides.length }
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+                slides[slideIndex - 1].style.display = "block";
+                dots[slideIndex - 1].className += " active";
+            }
+        </script>
+</body>
+
 </html>
